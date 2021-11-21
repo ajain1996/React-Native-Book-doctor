@@ -5,12 +5,25 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SearchDoctorScreen from '../screens/SearchDoctorScreen';
 import DoctorProfileScreen from '../screens/DoctorProfileScreen';
 import ScreenThree from '../screens/ScreenThree';
+import HomeScreen from '../screens/HomeScreen';
+import Tabs from '../bottomTabs/Tabs';
 
 const Stack = createStackNavigator();
 
 const NavigationStack = () => {
     return (
         <Stack.Navigator>
+            <Stack.Screen
+                name="Tabs"
+                component={Tabs}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{ headerShown: false }}
+            />
+
             <Stack.Screen
                 name="SearchDoctorScreen"
                 component={SearchDoctorScreen}
