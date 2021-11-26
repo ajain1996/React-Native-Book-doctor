@@ -9,10 +9,11 @@ export default function Header({ showIcon, text }) {
 
     return (
         <View style={{
-            width: windowWidth, backgroundColor: 'white', flexDirection: 'row',
-            alignItems: 'center', height: 52, paddingHorizontal: 20, justifyContent: 'space-between'
+            width: windowWidth, backgroundColor: 'white',
+            flexDirection: 'row', alignItems: 'center', height: 52,
+            paddingHorizontal: 20, justifyContent: 'space-between',
         }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                 <TouchableOpacity>
                     <Image
                         source={require("../../assets/arrow-back.png")}
@@ -20,7 +21,7 @@ export default function Header({ showIcon, text }) {
                     />
                 </TouchableOpacity>
                 <View style={{ width: showIcon ? "29%" : 20 }} />
-                <Text style={{ fontSize: 18, color: showIcon ? "#000" : '#51B7B7' }}>
+                <Text style={{ fontSize: 17, color: showIcon ? "#000" : '#51B7B7', fontWeight: '600' }}>
                     {text}
                 </Text>
             </View>

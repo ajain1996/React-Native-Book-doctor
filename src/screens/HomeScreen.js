@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
                     <View style={{ height: 20 }} />
 
                     {/* Top Image Background Image Block */}
-                    {renderBgImageComponent()}
+                    {renderBgImageComponent(navigation)}
                     <View style={{ height: 20 }} />
 
                     {/* Common health Block */}
@@ -96,7 +96,7 @@ export default function HomeScreen({ navigation }) {
 
 
 // 1.
-const renderBgImageComponent = () => (
+const renderBgImageComponent = (navigation) => (
     <View style={styles.bgImageContainer}>
         <ImageBackground
             source={require("../../assets/s1.png")}
@@ -118,7 +118,7 @@ const renderBgImageComponent = () => (
                 width={120} height={42} bgColor={Colors.BLUE2}
                 shadowColor={"#368edd"} textColor={Colors.WHITE}
                 backgroundDarker="#3d7fba"
-                onPress={() => { }}
+                onPress={() => { navigation.navigate("DoctorScreen") }}
             />
         </View>
     </View>

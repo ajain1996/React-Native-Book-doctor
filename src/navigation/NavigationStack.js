@@ -7,6 +7,7 @@ import DoctorProfileScreen from '../screens/DoctorProfileScreen';
 import ScreenThree from '../screens/ScreenThree';
 import HomeScreen from '../screens/HomeScreen';
 import Tabs from '../bottomTabs/Tabs';
+import DoctorScreen from '../screens/DoctorScreen';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,12 @@ const NavigationStack = () => {
             <Stack.Screen
                 name="ScreenThree"
                 component={ScreenThree}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="DoctorScreen"
+                component={DoctorScreen}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>
