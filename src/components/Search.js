@@ -8,18 +8,20 @@ import {
 import { Colors } from "../utils/Colors";
 
 
-const Search = () => {
+const Search = ({ title, icon, width, height, numberOfLines, bgHeight }) => {
     return (
-        <View style={styles.searchContainer}>
+        <View style={[styles.searchContainer, { height: bgHeight }]}>
             <TextInput
                 style={styles.searchInput}
                 onChangeText={(text) => { }}
-                placeholder="Search by doctor name or location"
+                placeholder={title ? title : "Search by doctor name or location"}
                 placeholderTextColor={Colors.ICONCOLOR}
+                numberOfLines={numberOfLines ? numberOfLines : 1}
+                multiline={true}
             />
             <Image
-                source={require("../../assets/mail-filter.png")}
-                style={styles.singleIcon}
+                source={icon ? icon : require("../../assets/mail-filter.png")}
+                style={[styles.singleIcon, { width: width ? width : 28, height: height ? height : 28 }]}
             />
         </View>
     );
@@ -29,8 +31,8 @@ export default Search;
 
 const styles = StyleSheet.create({
     searchInput: {
-        backgroundColor: Colors.WHITE, height: 50,
-        color: "white", width: "100%", paddingLeft: 24,
+        backgroundColor: Colors.WHITE,
+        color: "black", width: "100%", paddingLeft: 24,
         borderRadius: 10,
     },
     searchContainer: {

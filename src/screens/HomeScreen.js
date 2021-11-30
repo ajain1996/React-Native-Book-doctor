@@ -58,7 +58,7 @@ export default function HomeScreen({ navigation }) {
                     <BuildCommonTitleComponent
                         text="Top Speciality"
                         onPress={() => {
-                            navigation.navigate("SearchDoctorScreen")
+                            navigation.navigate("DoctorScreen2")
                         }}
                     />
 

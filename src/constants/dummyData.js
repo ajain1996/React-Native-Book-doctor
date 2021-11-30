@@ -88,3 +88,92 @@ export const dummyData = [
         "rating": "4.5",
     },
 ]
+
+export const availableTimeSlots = [
+    {
+        "time": "09:00 AM",
+        "id": 1,
+    },
+    {
+        "time": "09:30 AM",
+        "id": 2,
+    },
+    {
+        "time": "10:00 AM",
+        "id": 3,
+    },
+    {
+        "time": "10:30 AM",
+        "id": 4,
+    },
+    {
+        "time": "12:00 AM",
+        "id": 5,
+    },
+    {
+        "time": "12:30 AM",
+        "id": 6,
+    },
+    {
+        "time": "01:30 AM",
+        "id": 7,
+    },
+    {
+        "time": "02:00 AM",
+        "id": 8,
+    },
+    {
+        "time": "03:00 PM",
+        "id": 9,
+    },
+    {
+        "time": "04:30 PM",
+        "id": 10,
+    },
+    {
+        "time": "05:00 PM",
+        "id": 11,
+    },
+    {
+        "time": "05:30 PM",
+        "id": 12,
+    },
+];
+
+
+export const dummyDaysData = [
+    {
+        "name": "MON",
+        "id": 13,
+    },
+    {
+        "name": "TUE",
+        "id": 14,
+    },
+    {
+        "name": "WED",
+        "id": 15,
+    },
+    {
+        "name": "THU",
+        "id": 16,
+    },
+    {
+        "name": "FRI",
+        "id": 17,
+    },
+    {
+        "name": "SAT",
+        "id": 18,
+    },
+];
+
+export const listOfPatients = [
+    "name",
+    "name",
+    "name",
+    "name",
+    "name",
+    "name",
+];
+

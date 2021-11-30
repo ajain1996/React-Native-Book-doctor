@@ -8,6 +8,10 @@ import ScreenThree from '../screens/ScreenThree';
 import HomeScreen from '../screens/HomeScreen';
 import Tabs from '../bottomTabs/Tabs';
 import DoctorScreen from '../screens/DoctorScreen';
+import DoctorScreen2 from '../screens/DoctorScreen2';
+import SelectSchedule from '../screens/SelectSchedule';
+import SelectScheduleCalendar from '../screens/SelectScheduleCalendar';
+import ScheduleScreen from '../screens/ScheduleScreen';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +50,30 @@ const NavigationStack = () => {
             <Stack.Screen
                 name="DoctorScreen"
                 component={DoctorScreen}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="DoctorScreen2"
+                component={DoctorScreen2}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="ScheduleScreen"
+                component={ScheduleScreen}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="SelectSchedule"
+                component={SelectSchedule}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="SelectScheduleCalendar"
+                component={SelectScheduleCalendar}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>

@@ -9,7 +9,7 @@ import { Colors } from '../utils/Colors';
 import { windowWidth } from '../utils/utils';
 
 
-export default function DoctorScreen() {
+export default function DoctorScreen({ navigation }) {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
             <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -29,7 +29,10 @@ export default function DoctorScreen() {
                     }
                     renderItem={({ item }) => {
                         return (
-                            <BuildDetailDoctorComponent item={item} />
+                            <BuildDetailDoctorComponent
+                                item={item} width={windowWidth / 2 - 22}
+                                navigation={navigation}
+                            />
                         );
                     }}
                     ListFooterComponent={
@@ -63,15 +66,15 @@ export default function DoctorScreen() {
 }
 
 
-const BuildDetailDoctorComponent = ({ item }) => {
+export const BuildDetailDoctorComponent = ({ item, width, cardFooter, navigation }) => {
 
-    const renderDoctorImageComponent = (item) => {
+    const renderDoctorImageComponent = (item, cardFooter) => {
         return (
             <Image
                 source={{ uri: item.image }}
                 resizeMode="cover"
                 style={{
-                    width: "100%", height: 150,
+                    width: "100%", height: cardFooter ? 250 : 150,
                     borderTopLeftRadius: 8, borderTopRightRadius: 8
                 }}
             />
@@ -80,10 +83,7 @@ const BuildDetailDoctorComponent = ({ item }) => {
 
     const renderHeartComponent = () => {
         return (
-            <View style={{
-                position: 'absolute', top: 8, right: 8, width: 30, height: 30, backgroundColor: '#fff',
-                justifyContent: 'center', alignItems: 'center', borderRadius: 100
-            }}>
+            <View style={styles.heartComponentStyle}>
                 <Image
                     source={require("../../assets/heart.png")}
                     style={{ width: 20, height: 20 }}
@@ -93,15 +93,13 @@ const BuildDetailDoctorComponent = ({ item }) => {
     }
 
     return (
-        <View style={{ marginTop: 10, width: windowWidth / 2 - 22 }}>
-            {renderDoctorImageComponent(item)}
+        <View style={{ marginTop: cardFooter ? 20 : 10, width: width }}>
+            {renderDoctorImageComponent(item, cardFooter)}
             {renderHeartComponent()}
 
-            <View style={{
-                position: 'absolute', top: 98, backgroundColor: '#57B1B1', padding: 3,
-                borderTopRightRadius: 30, borderBottomRightRadius: 30, width: 100,
-                flexDirection: 'row', alignItems: "center", paddingLeft: 7
-            }}>
+            <View style={[styles.imageAvailability, {
+                top: cardFooter ? 180 : 98
+            }]}>
                 <Image
                     source={require("../../assets/clock.png")}
                     style={{ width: 14, height: 14, marginRight: 7, tintColor: '#fff' }}
@@ -109,13 +107,13 @@ const BuildDetailDoctorComponent = ({ item }) => {
                 <Text style={{ fontSize: 10, fontWeight: "600", color: '#fff' }}>{`Available in\n48 min`}</Text>
             </View>
 
-            <BuildDoctorDetailsComponent item={item} />
+            <BuildDoctorDetailsComponent item={item} cardFooter={cardFooter} navigation={navigation} />
         </View>
     );
 }
 
 
-const BuildDoctorDetailsComponent = ({ item }) => {
+export const BuildDoctorDetailsComponent = ({ item, cardFooter, navigation }) => {
 
     const renderDoctorNameComponent = (item) => {
         return (
@@ -123,11 +121,7 @@ const BuildDoctorDetailsComponent = ({ item }) => {
                 <Text style={{ color: '#000', fontWeight: '700' }}>
                     {item.name}
                 </Text>
-                <Card style={{
-                    backgroundColor: Colors.GREEN, width: 10, height: 10,
-                    borderRadius: 100, borderWidth: 2, borderColor: '#fff',
-                    marginLeft: 4
-                }} />
+                <Card style={styles.doctorStatudcardStyle} />
             </View>
         );
     }
@@ -149,7 +143,7 @@ const BuildDoctorDetailsComponent = ({ item }) => {
         );
     }
 
-    const renderDoctorPriceComponent = (item) => {
+    const renderDoctorPriceComponent = (item, cardFooter) => {
         return (
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={{ color: '#000', fontSize: 20, fontWeight: '700' }}>
@@ -159,13 +153,40 @@ const BuildDoctorDetailsComponent = ({ item }) => {
                 <CustomButton
                     text="Book" fs={12}
                     textColor={"white"}
-                    width={65} height={26}
+                    width={cardFooter ? 90 : 65} height={cardFooter ? 30 : 26}
                     br={100} raiseLevel={2}
                     bgColor={Colors.BLUE2}
                     shadowColor={"#368edd"}
                     backgroundDarker="#3d7fba"
-                    onPress={() => { }}
+                    onPress={() => { navigation.navigate("ScheduleScreen") }}
                 />
+            </View>
+        );
+    }
+
+
+    const renderCardFooterComponent = () => {
+        return (
+            <View style={styles.cardFooterContainer}>
+                <Image
+                    source={require("../../assets/heart-fill.png")}
+                    style={{
+                        width: 6, height: 6,
+                        marginRight: -3,
+                        tintColor: Colors.BLUE2,
+                    }}
+                />
+                <Image
+                    source={require("../../assets/user.png")}
+                    style={{
+                        width: 18, height: 18,
+                        marginRight: 2,
+                        tintColor: Colors.BLUE2,
+                    }}
+                />
+                <Text style={{ color: '#000', fontSize: 14, fontWeight: '400' }}>
+                    Treated 800+ patients
+                </Text>
             </View>
         );
     }
@@ -182,7 +203,9 @@ const BuildDoctorDetailsComponent = ({ item }) => {
                 {item.info}
             </Text>
             <View style={{ height: 8 }} />
-            {renderDoctorPriceComponent(item)}
+            {renderDoctorPriceComponent(item, cardFooter)}
+            {/* cardFooter */}
+            {cardFooter ? renderCardFooterComponent() : <></>}
         </Card>
     );
 }
@@ -194,6 +217,36 @@ const styles = StyleSheet.create({
         shadowColor: '#999', borderColor: "#fff",
         padding: 12, borderTopRightRadius: 10,
         borderTopLeftRadius: 10
+    },
+    imageAvailability: {
+        position: 'absolute', top: 98,
+        backgroundColor: '#57B1B1',
+        padding: 3, width: 100,
+        borderTopRightRadius: 30,
+        borderBottomRightRadius: 30,
+        flexDirection: 'row',
+        alignItems: "center",
+        paddingLeft: 7,
+    },
+    cardFooterContainer: {
+        borderTopWidth: 1, borderColor: "#dcdcdc",
+        flexDirection: 'row', alignItems: "center",
+        marginTop: 8, paddingTop: 8
+    },
+    heartComponentStyle: {
+        position: 'absolute',
+        top: 8, right: 8,
+        width: 30, height: 30,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
+    },
+    doctorStatudcardStyle: {
+        backgroundColor: Colors.GREEN,
+        width: 10, height: 10,
+        borderRadius: 100, borderWidth: 2,
+        borderColor: '#fff', marginLeft: 4
     }
 });
 
